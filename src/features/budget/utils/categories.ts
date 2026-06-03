@@ -3,7 +3,7 @@ import type { Category, CategoryId } from '../types';
 export const CATEGORIES: Readonly<Record<CategoryId, Category>> = {
   food:          { id: 'food',          label: 'Food & Dining',    icon: '🍛', type: 'expense',  keywords: ['food','lunch','dinner','breakfast','restaurant','zomato','swiggy','grocery','groceries','cafe','coffee','snack','biryani'] },
   transport:     { id: 'transport',     label: 'Transport',        icon: '🚌', type: 'expense',  keywords: ['uber','ola','auto','bus','metro','fuel','petrol','diesel','cab','taxi','train','flight','rapido'] },
-  housing:       { id: 'housing',       label: 'Housing',          icon: '🏠', type: 'expense',  keywords: ['rent','maintenance','society','electricity','water','gas','wifi','internet','broadband'] },
+  housing:       { id: 'housing',       label: 'Housing',          icon: '🏠', type: 'expense',  keywords: ['housing','house','home','flat','rent','maintenance','society','electricity','water','gas','wifi','internet','broadband'] },
   utilities:     { id: 'utilities',     label: 'Utilities',        icon: '💡', type: 'expense',  keywords: ['phone','mobile','recharge','sim','bill','subscription','netflix','spotify','amazon','prime','hotstar'] },
   health:        { id: 'health',        label: 'Health',           icon: '🏥', type: 'expense',  keywords: ['doctor','medicine','pharmacy','hospital','gym','fitness','yoga','medical','health','chemist','apollo'] },
   entertainment: { id: 'entertainment', label: 'Entertainment',    icon: '🎮', type: 'expense',  keywords: ['movie','cinema','pvr','inox','game','steam','fun','outing','party','concert','bowling'] },
@@ -26,20 +26,28 @@ for (const [catId, cat] of Object.entries(CATEGORIES)) {
 
 /**
  * Auto-detect category from description text.
- * O(k) where k = number of words in description (typically < 10).
- * Falls back to 'other'.
+ * Cleans up syntax details, applies exact maps, and utilizes bi-directional substring checks.
  */
 export function detectCategory(description: string): CategoryId {
-  const words = description.toLowerCase().split(/\s+/);
+  if (!description || description.trim().length < 2) return 'other';
+
+  const lower = description.toLowerCase().trim();
+  const words = lower.split(/\s+/);
+
+  // Pass 1: Strict Exact Word Matching (Stripping punctuation marks like trailing commas)
   for (const word of words) {
-    const match = KEYWORD_INDEX.get(word);
+    const cleanWord = word.replace(/^[.,\/#!$%\^&\*;:{}=\-_`~()]+/g, "").replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]+$/g, "");
+    const match = KEYWORD_INDEX.get(cleanWord);
     if (match) return match;
   }
-  // try substring match for compound words (e.g. "phonepe" contains "phone")
-  const lower = description.toLowerCase();
-  for (const [kw, catId] of KEYWORD_INDEX) {
-    if (lower.includes(kw)) return catId;
+
+  // Pass 2: Bi-directional Substring Fallback Match
+  for (const [kw, catId] of KEYWORD_INDEX.entries()) {
+    if (lower.includes(kw) || kw.includes(lower)) {
+      return catId;
+    }
   }
+
   return 'other';
 }
 
