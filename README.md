@@ -63,18 +63,21 @@ npm run dev
 Open [http://localhost:5173](http://localhost:5173)
 
 ## Project Structure
+
+```
 src/
-features/
-budget/
-components/     # TransactionForm, BudgetGoals, BudgetCharts
-hooks/          # useTransactions — all state and persistence
-utils/          # categories.ts (O1 detection), csvEngine.ts
-types.ts        # Transaction, BudgetGoal, MonthlySummary
-shared/
-utils/
-formatCurrency.ts   # Intl.NumberFormat with en-IN locale
-App.tsx
-main.tsx
+├── features/
+│   └── budget/
+│       ├── components/    # TransactionForm, BudgetGoals, BudgetCharts
+│       ├── hooks/         # useTransactions — all state and persistence
+│       ├── utils/         # categories.ts (O1 detection), csvEngine.ts
+│       └── types.ts       # Transaction, BudgetGoal, MonthlySummary
+├── shared/
+│   └── utils/
+│       └── formatCurrency.ts  # Intl.NumberFormat with en-IN locale
+├── App.tsx
+└── main.tsx
+```
 
 
 ## Performance Notes
