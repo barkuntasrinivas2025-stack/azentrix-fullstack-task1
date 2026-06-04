@@ -4,11 +4,10 @@
 
 ## Screenshots
 
-![Dashboard](screenshots/Screenshot%202026-06-04%20112956.png)
-![Edit Transaction](screenshots/Screenshot%202026-06-04%20112219.png)
-![Empty State](screenshots/Screenshot%202026-06-04%20112322.png)
-![Mobile View](screenshots/Screenshot%202026-06-04%20112519.png)
-![Budget Goals](screenshots/Screenshot%202026-06-04%20112634.png)
+![Dashboard](screenshots/Screenshot%202026-06-03%20114640.png)
+![Charts & Ledger](screenshots/Screenshot%202026-06-03%20113205.png)
+![Empty State](screenshots/Screenshot%202026-06-03%20113044.png)
+![Mobile View](screenshots/Screenshot%202026-06-03%20093645.png)
 
 ## Tech Stack
 
@@ -26,8 +25,8 @@
 - [x] Add, edit, delete income and expense entries
 - [x] Category and date on every entry
 - [x] Dashboard with monthly summary cards
-- [x] Bar chart (3-month spending trend)
-- [x] Category breakdown (Top Spending Sectors)
+- [x] Bar chart — 3-month spending trend
+- [x] Category breakdown — Top Spending Sectors
 - [x] Data persistence via localStorage
 - [x] Fully responsive across mobile and desktop
 
@@ -63,7 +62,7 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ## Performance Notes
 
-- Bundle size: < 200KB gzipped
-- localStorage operations: synchronous, < 1ms
 - Category detection: O(1) per word, O(k) per description where k = word count
 - All list renders use stable `transaction.id` keys, never array index
+- Memoized monthly summaries — recomputes only when transactions change
+- Functional setState prevents stale closure bugs on concurrent updates
