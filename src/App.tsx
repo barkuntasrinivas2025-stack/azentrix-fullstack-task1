@@ -114,31 +114,33 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 text-slate-900 antialiased p-6">
 
       {/* Header */}
-      <header className="max-w-6xl mx-auto mb-8 pb-4 border-b border-slate-200 flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">💳 Azentrix Budget Tracker</h1>
-          <p className="text-xs text-slate-400 mt-0.5">Personal Finance Dashboard</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <label className="text-xs font-medium px-3 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">
-            📤 Import CSV
-            <input type="file" accept=".csv" onChange={handleCSVImport} className="hidden" />
-          </label>
-          <button
-            onClick={handleCSVExport}
-            className="text-xs font-medium px-3 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
-          >
-            📊 Export CSV
-          </button>
-          <button
-            onClick={exportDataBackup}
-            className="text-xs font-medium px-3 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
-          >
-            📥 Export JSON
-          </button>
-          <span className="text-xs text-slate-400">{currentMonthStr}</span>
-        </div>
-      </header>
+<header className="max-w-6xl mx-auto mb-6 pb-4 border-b border-slate-200">
+  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+    <div>
+      <h1 className="text-xl font-bold">💳 Azentrix Budget Tracker</h1>
+      <p className="text-xs text-slate-400 mt-0.5">Personal Finance Dashboard</p>
+    </div>
+    <div className="flex items-center gap-2 flex-wrap">
+      <label className="text-xs font-medium px-2.5 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">
+        📤 Import
+        <input type="file" accept=".csv" onChange={handleCSVImport} className="hidden" />
+      </label>
+      <button
+        onClick={handleCSVExport}
+        className="text-xs font-medium px-2.5 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
+      >
+        📊 CSV
+      </button>
+      <button
+        onClick={exportDataBackup}
+        className="text-xs font-medium px-2.5 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
+      >
+        📥 JSON
+      </button>
+      <span className="text-xs text-slate-400">{currentMonthStr}</span>
+    </div>
+  </div>
+</header>
 
       {/* Main grid */}
       <main className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
