@@ -5,16 +5,20 @@ import { Transaction, CategoryId } from '../types';
  */
 export function exportToCSV(transactions: Transaction[]): string {
   const headers = ['Date', 'Description', 'Type', 'Amount', 'Category', 'Currency'];
-  const rows = transactions.map(tx => [
-    tx.date,
-    `"${tx.description.replace(/"/g, '""')}"`, // Escape quotes securely
-    tx.type,
-    tx.amount.toString(),
-    tx.categoryId,
-    tx.currencyCode
-  ]);
   
-  return [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const rows = transactions.map(tx => [
+    tx.date,                                          // "2026-06-04"
+    `"${tx.description.replace(/"/g, '""')}"`,        // escaped description
+    tx.type,                                          // "income" | "expense"
+    tx.amount.toFixed(2),                             // "450.00"
+    tx.categoryId,                                    // "food"
+    tx.currencyCode                                   // "INR"
+  ]);
+
+  return [
+    headers.join(','),
+    ...rows.map(r => r.join(','))
+  ].join('\r\n');  // ← use \r\n not \n — Excel on Windows requires CRLF
 }
 
 /**
