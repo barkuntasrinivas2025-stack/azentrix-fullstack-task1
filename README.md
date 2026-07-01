@@ -1,4 +1,4 @@
-# 💳 Azentrix Budget Tracker
+# 💳 Budget Tracker
 
 > Personal Finance Dashboard | [Live Demo](https://azentrix-fullstack-task1-delta.vercel.app) | Built for Azentrix Summer Internship 2026
 
