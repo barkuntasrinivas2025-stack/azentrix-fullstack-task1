@@ -117,7 +117,7 @@ export default function App() {
 <header className="max-w-6xl mx-auto mb-6 pb-4 border-b border-slate-200">
   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
     <div>
-      <h1 className="text-xl font-bold">💳 Azentrix Budget Tracker</h1>
+      <h1 className="text-xl font-bold">💳 Personal Budget Tracker</h1>
       <p className="text-xs text-slate-400 mt-0.5">Personal Finance Dashboard</p>
     </div>
     <div className="flex items-center gap-2 flex-wrap">
